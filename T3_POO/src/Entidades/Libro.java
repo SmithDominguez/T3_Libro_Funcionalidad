@@ -65,11 +65,7 @@ public class Libro {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    public boolean prestar() {
-        if (cantidad > 0) {
-            cantidad--;
-            return true;
-        }
-    return false;
+    public String getLibroText(){
+        return "" +codigo+ " - " + titulo + " - " + autor + " - " + cantidad;
     }
 }

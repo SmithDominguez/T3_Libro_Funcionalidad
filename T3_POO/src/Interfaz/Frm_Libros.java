@@ -25,9 +25,6 @@ public class Frm_Libros extends javax.swing.JFrame {
     private Statement st;
     private DefaultListModel modelList = new DefaultListModel();
     private List<Libro> librosLista;
-    /**
-     * Creates new form Frm_Libros
-     */
     public Frm_Libros() {
         conectarDB();
         initComponents();
@@ -167,7 +164,7 @@ public class Frm_Libros extends javax.swing.JFrame {
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
         String codigo = txt_codigo.getText();
         Libro libro = new Libro(codigo);
-        //buscarUsuario(libro,codigo);
+        buscarUsuario(libro,codigo);
     }//GEN-LAST:event_btn_buscarActionPerformed
     private void conectarDB(){
         try {
@@ -198,7 +195,24 @@ public class Frm_Libros extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "ERROR: No se pudo eliminar");
         }
     } 
-
+    private void buscarUsuario(Libro libro, String codigo){
+        DataAccesLibro dao = new DataAccesLibro(st, libro);
+        try {
+            Libro libroEncontrado = dao.buscar();
+            if (libroEncontrado != null) {
+                txt_codigo.setText(String.valueOf(libroEncontrado.getCodigo()));
+                txt_titulo.setText(libroEncontrado.getTitulo());
+                txt_autor.setText(libroEncontrado.getAutor()); 
+                txt_cantidad.setText(String.valueOf(libroEncontrado.getCantidad()));
+                JOptionPane.showMessageDialog(this, "Usuario encontrado: " + libroEncontrado.getLibroText());
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuario no encontrado.");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Frm_Libros.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error al buscar el usuario: " + ex.getMessage());
+        }
+    } 
     private void listarLibros(){
         try {
             DataAccesLibro dao = new DataAccesLibro(st);

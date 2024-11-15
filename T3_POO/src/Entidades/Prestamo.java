@@ -15,8 +15,8 @@ public class Prestamo {
     private String id;
     private LocalDate fechaPrestamo;
     private LocalDate fechaDevolucion;
-    private Estudiante estudiante; // Relación reflexiva con Estudiante
-    private List<Libro> libros;    // Relación composición con Libro
+    private Estudiante estudiante; 
+    private List<Libro> libros;
 
     public Prestamo(LocalDate fechaPrestamo, LocalDate fechaDevolucion,Estudiante estudiante) {
         this.fechaPrestamo = fechaPrestamo;

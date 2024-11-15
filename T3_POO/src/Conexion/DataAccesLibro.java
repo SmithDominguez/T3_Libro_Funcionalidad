@@ -41,13 +41,11 @@ public class DataAccesLibro {
 
     public void insertarLibro() throws SQLException {
         try {
-            // Incluir todos los valores al realizar la inserción
             int codigo = Integer.parseInt(libro.getCodigo());
             String titulo = libro.getTitulo();
             String autor = libro.getAutor();
             int cantidad = libro.getCantidad();
 
-            // Query para insertar con todos los campos
             st.execute("INSERT INTO Libros (Codigo, Titulo, Autor, Cantidad) VALUES (" 
                     + codigo + ", '" + titulo + "', '" + autor + "', " + cantidad + ")");
             System.out.println("Libro insertado correctamente.");
@@ -67,12 +65,10 @@ public class DataAccesLibro {
     public Libro buscar() throws SQLException {
         Libro libroEncontrado = null;
         try {
-            // Consulta para buscar el libro por código
             String query = "SELECT * FROM Libros WHERE Codigo = " + libro.getCodigo();
             ResultSet rs = st.executeQuery(query);
 
             if (rs.next()) {
-                // Crear un objeto Libro con los datos obtenidos
                 libroEncontrado = new Libro(rs);
             }
         } catch (SQLException e) {
